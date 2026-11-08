@@ -1,0 +1,17 @@
+#THIS FILE IS FROM CLAUDE AI
+out/
+.vs/
+build/
+cmake-build-*/
+.vscode/
+x64/
+Debug/
+Release/
+*.exe
+*.obj
+*.o
+*.pdb
+*.ilk
+*.sln
+*.vcxproj*
+*.user

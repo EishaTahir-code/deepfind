@@ -1,0 +1,27 @@
+//THIS FILE IS FROM CLAUDE AI
+cmake_minimum_required(VERSION 3.15)
+project(DeepFind LANGUAGES CXX)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+enable_testing()
+
+function(add_program_if_ready name)
+    foreach(file ${ARGN})
+        if(NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/${file}")
+            message(STATUS "Skipping ${name}: ${file} is not written yet")
+            return()
+        endif()
+    endforeach()
+    add_executable(${name} ${ARGN})
+endfunction()
+
+add_program_if_ready(deepfind main.cpp Indexer.cpp Ranker.cpp QueryEngine.cpp)
+add_program_if_ready(test_indexer test_indexer_ds.cpp Indexer.cpp)
+add_program_if_ready(test_ranker test_ranker_ds.cpp Ranker.cpp)
+add_program_if_ready(test_query test_query_ds.cpp Indexer.cpp QueryEngine.cpp)
+
+foreach(testProgram test_indexer test_ranker test_query)
+    if(TARGET ${testProgram})
+        add_test(NAME ${testProgram} COMMAND ${testProgram})
+    endif()
+endforeach()
