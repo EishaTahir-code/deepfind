@@ -45,6 +45,28 @@ class CustomVector{
             data[i] = other.data[i];
         }
     }
+
+    //assignment copy constructor
+    CustomVector& operator=(const CustomVector& other){
+        if(this == &other){
+            return *this;
+        }
+        count = other.count;
+        capacity = other.capacity;
+        if(capacity == 0){
+            data = nullptr;
+            return;
+        }
+        T* temp = new T[capacity];
+        for(int i = 0; i<count; i++){
+            temp[i] = data [i];
+        }
+        delete [] data;
+        data = temp;
+
+        return *this
+    }
+
     int size(){
         return count;
     }
@@ -70,7 +92,19 @@ class CustomVector{
         }
         count = 0;
     }
-    
+
+    T& back(){
+        if(count == 0)
+            throw out_of_range("back on an empty CustomVector");
+        return data[count-1];
+    }
+
+    const T& back() const{
+        if(count == 0)
+            throw out_of_range("back on an empty CustomVector");
+        return data[count-1];        
+    }
+
     ~CustomVector(){
         delete [] data;
     }
