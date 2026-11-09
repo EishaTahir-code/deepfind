@@ -98,6 +98,13 @@ class CustomHashTable{
         count++;
     }
 
+    bool contains(const K& key) const{
+        return (findNode(key))? true : false;
+    }
+    int size() const{
+        return count;
+    }
+
     ~CustomHashTable(){
         for(int i = 0; i<capacity; i++){
             HashNode<K,V>* curr = buckets[i];
