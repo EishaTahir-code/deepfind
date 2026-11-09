@@ -43,6 +43,10 @@ class CustomHashTable{
     int count;
     int capacity;
 
+    int getBucketIdx(const K& key){
+        return hashKey(key)%capacity;
+    }
+
     public:
     CustomHashTable(){
         count = 0;
@@ -58,7 +62,7 @@ class CustomHashTable{
     CustomHashTable& operator=(const CustomHashTable&) = delete;
 
     V* find(const K& key){
-        int index = hashKey(key) % capacity;
+        int index = getBucketIdx(key);
         HashNode<K,V>* temp = buckets[index];
         while(temp!=NULL){
             if(temp->key == key){
@@ -67,6 +71,20 @@ class CustomHashTable{
             temp = temp->next;
         }
         return nullptr;
+    }
+
+    void insert(const K& key, const V& val){
+        int index = getBucketIdx(key);
+        HashNode<K,v> newNode = new HashNode<K,V>(key,val);
+        if(buckets[index] == NULL){   //linked list at that Idx is empty
+            buckets[index] = newNode;
+            return;
+        }
+        HashNode<K,V>* temp = buckets[index];
+        while(temp->next!=NULL){
+            temp = temp->next;
+        }
+        temp->next = newNode;
     }
 
     ~CustomHashTable(){
