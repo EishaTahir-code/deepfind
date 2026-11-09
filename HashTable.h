@@ -13,6 +13,7 @@ class HashNode{
         key = k;
         val = v;
         next = NULL;
+          
     }
 };
 
