@@ -33,7 +33,38 @@ class HashNode{
     HashNode(const K& k, const V& v){
         key = k;
         val = v;
-        next = NULL;
+        next = nullptr;
     }
 };
 
+template <class K, class V>
+class CustomHashTable{
+    HashNode<K,V> **buckets;
+    int count;
+    int capacity;
+
+    public:
+    CustomHashTable(){
+        count = 0;
+        capacity = 16;
+        buckets = new HashNode<K,V>* [capacity];
+        for(int i= 0; i<capacity; i++){
+            buckets[i] = nullptr;
+        }
+    }
+    CustomHashTable(const CustomHashTable&) = delete;         
+    CustomHashTable& operator=(const CustomHashTable&) = delete;
+
+    ~CustomHashTable(){
+        for(int i = 0; i<capacity; i++){
+            HashNode<K,V>* curr = buckets[i];
+            while(curr != NULL){
+                HashNode<K,V>* temp = curr;
+                curr = curr->next;
+                delete temp;
+                temp = nullptr;
+            }
+        }
+        delete [] buckets;
+    }
+};
