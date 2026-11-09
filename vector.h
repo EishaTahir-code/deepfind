@@ -14,7 +14,7 @@ class CustomVector{
             data = new T[capacity];
             return;
         }
-        capacity = capacity*2
+        capacity = capacity*2;
         T* temp = new T[capacity];
         for(int i = 0; i<count; i++){
             temp[i] = data [i];
@@ -51,29 +51,39 @@ class CustomVector{
         if(this == &other){
             return *this;
         }
-        count = other.count;
-        capacity = other.capacity;
-        if(capacity == 0){
-            data = nullptr;
-            return;
-        }
-        T* temp = new T[capacity];
-        for(int i = 0; i<count; i++){
-            temp[i] = data [i];
+
+        T* temp = nullptr;
+        if(other.capacity > 0){
+            temp = new T[other.capacity];
+            for(int i=0; i<other.count; i++){
+                temp[i] = other.data[i];
+            }
         }
         delete [] data;
         data = temp;
-
-        return *this
+        count = other.count;
+        capacity = other.capacity;
+        return *this;
     }
 
-    int size(){
+    T& operator[](int index){
+        if(index < 0 || index >= count)
+            throw out_of_range("CustomVector index out of range");
+        return data[index];
+    }
+
+    const T& operator[](int index) const{
+        if(index < 0 || index >= count)
+            throw out_of_range("CustomVector index out of range");
+        return data[index];        
+    }
+    int size() const{
         return count;
     }
-    bool isEmpty(){
+    bool empty() const{
         return count == 0;
     }
-    void push_back(T val){
+    void push_back(const T& val){
         if(count==capacity){
             grow();
         }
