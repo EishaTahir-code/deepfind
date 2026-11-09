@@ -52,8 +52,22 @@ class CustomHashTable{
             buckets[i] = nullptr;
         }
     }
+
+    //to prevent from copying hashtable as require much space and time
     CustomHashTable(const CustomHashTable&) = delete;         
     CustomHashTable& operator=(const CustomHashTable&) = delete;
+
+    V* find(const K& key){
+        int index = hashKey(key) % capacity;
+        HashNode<K,V>* temp = buckets[index];
+        while(temp!=NULL){
+            if(temp->key == key){
+                return &(temp->val);
+            }
+            temp = temp->next;
+        }
+        return nullptr;
+    }
 
     ~CustomHashTable(){
         for(int i = 0; i<capacity; i++){
