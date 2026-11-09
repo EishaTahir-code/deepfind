@@ -1,6 +1,5 @@
-#include<iostream>
+#pragma once
 #include<stdexcept>
-using namespace std;
 
 template <class T>
 class CustomVector{
@@ -68,13 +67,13 @@ class CustomVector{
 
     T& operator[](int index){
         if(index < 0 || index >= count)
-            throw out_of_range("CustomVector index out of range");
+            throw std::out_of_range("CustomVector index out of range");
         return data[index];
     }
 
     const T& operator[](int index) const{
         if(index < 0 || index >= count)
-            throw out_of_range("CustomVector index out of range");
+            throw std::out_of_range("CustomVector index out of range");
         return data[index];        
     }
     int size() const{
@@ -91,7 +90,7 @@ class CustomVector{
     }
     void pop_back(){
         if(count == 0){
-            throw out_of_range("pop_back on an empty CustomVector");
+            throw std::out_of_range("pop_back on an empty CustomVector");
         }
         count--;
         data[count] = T();
@@ -105,13 +104,13 @@ class CustomVector{
 
     T& back(){
         if(count == 0)
-            throw out_of_range("back on an empty CustomVector");
+            throw std::out_of_range("back on an empty CustomVector");
         return data[count-1];
     }
 
     const T& back() const{
         if(count == 0)
-            throw out_of_range("back on an empty CustomVector");
+            throw std::out_of_range("back on an empty CustomVector");
         return data[count-1];        
     }
 
