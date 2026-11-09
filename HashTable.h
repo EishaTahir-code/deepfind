@@ -43,10 +43,22 @@ class CustomHashTable{
     int count;
     int capacity;
 
-    int getBucketIdx(const K& key){
+    int getBucketIdx(const K& key) const{
         return hashKey(key)%capacity;
     }
 
+    HashNode<K,V>* findNode(const K& key) const{
+        int index  = getBucketIdx(key);
+        HashNode<K,V>* temp = buckets[index];
+        while(temp != NULL){
+            if(temp->key == key){
+                return temp;
+            }
+            temp = temp->next;
+        }
+        return nullptr;
+    }
+    
     public:
     CustomHashTable(){
         count = 0;
@@ -62,29 +74,28 @@ class CustomHashTable{
     CustomHashTable& operator=(const CustomHashTable&) = delete;
 
     V* find(const K& key){
-        int index = getBucketIdx(key);
-        HashNode<K,V>* temp = buckets[index];
-        while(temp!=NULL){
-            if(temp->key == key){
-                return &(temp->val);
-            }
-            temp = temp->next;
-        }
-        return nullptr;
+        HashNode<K,V>* temp = findNode(key);
+        return (temp)? &(temp->val) : nullptr;
+    }
+
+    const V* find(const K& key) const{
+        HashNode<K,V>* temp = findNode(key);
+        return (temp)? &(temp->val) : nullptr;       
     }
 
     void insert(const K& key, const V& val){
-        int index = getBucketIdx(key);
-        HashNode<K,v> newNode = new HashNode<K,V>(key,val);
-        if(buckets[index] == NULL){   //linked list at that Idx is empty
-            buckets[index] = newNode;
+        //if key exists so will overwrite its value
+        HashNode<K,V>* exists = findNode(key);
+        if(exists){
+            exists->val = val;
             return;
         }
-        HashNode<K,V>* temp = buckets[index];
-        while(temp->next!=NULL){
-            temp = temp->next;
-        }
-        temp->next = newNode;
+        int index = getBucketIdx(key);
+        HashNode<K,V>* newNode = new HashNode<K,V>(key,val);
+
+        newNode->next = buckets[index];
+        buckets[index] = newNode;
+        count++;
     }
 
     ~CustomHashTable(){
