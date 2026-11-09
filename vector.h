@@ -8,11 +8,42 @@ class CustomVector{
     int count;
     int capacity;
 
+    void grow(){
+        if(capacity == 0){
+            capacity = 1;
+            data = new T[capacity];
+            return;
+        }
+        capacity = capacity*2
+        T* temp = new T[capacity];
+        for(int i = 0; i<count; i++){
+            temp[i] = data [i];
+        }
+        delete [] data;
+        data = temp;
+    }
+
     public:
     CustomVector(){
         data = nullptr;
         count = 0;
         capacity = 0;
+    }
+
+    //deep copy constructor
+    CustomVector(const CustomVector& other){
+        count = other.count;
+        capacity = other.capacity;
+
+        if(capacity == 0){
+            data = nullptr;
+            return;
+        }
+
+        data = new T[capacity];
+        for(int i =0; i<count ; i++){
+            data[i] = other.data[i];
+        }
     }
     int size(){
         return count;
@@ -39,6 +70,7 @@ class CustomVector{
         }
         count = 0;
     }
+    
     ~CustomVector(){
         delete [] data;
     }
