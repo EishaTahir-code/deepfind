@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include "vector.h"
+#include "Vector.h"
 
 using namespace std;
 
@@ -35,4 +35,7 @@ inline bool ranksHigher(const SearchResult& a, const SearchResult& b) {
     if (a.score != b.score) return a.score > b.score;
     if (a.termsMatched != b.termsMatched) return a.termsMatched > b.termsMatched;
     return a.fileId < b.fileId;
+}
+inline bool operator>(const SearchResult& a, const SearchResult& b) {
+    return ranksHigher(a, b);
 }
