@@ -2,8 +2,10 @@
    occurrence in a particular file (fileID), frequency of the word, 
    and vector list of struct occurrence (lineNumber, timesOnLine) */
 
-#pragma once                 
+#pragma once
 #include<string>
 #include "Types.h"
-#include "HashTable.h"           
-#include "Set.h"      
+#include "HashTable.h"
+#include "Set.h" 
+
+
