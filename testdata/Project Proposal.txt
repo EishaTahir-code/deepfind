@@ -1,0 +1,49 @@
+﻿National University of Computer & Emerging Sciences Karachi Campus 
+DeepFind : Personal Search Engine 
+Project Proposal 
+Data Structures 
+Section: G 
+Group Members: 
+25k-0668 Esh Tu Raazia 25k 
+0527 Syeda Eisha Tahir 
+25k-0691 Anseeba Ali Jivani
+Project Proposal 
+Introduction 
+The Personal Content Search Engine is a file-searching system designed to help users quickly find  information stored in their personal files. Instead of relying on file names or folder locations, the  system searches the actual content of files and retrieves the most relevant results based on the  frequency of the searched word. 
+The system supports text files (.txt) and C++ source and header files (.cpp, .h), making it  particularly useful for students who need to search through their notes, assignments, and previously  written programs. It uses fundamental data structures and algorithms to organize file contents,  enable efficient searching, rank results, and provide word suggestions. 
+The project focuses on the practical implementation of data structures, including hash tables, tries,  heaps, vectors, and sorting algorithms, to develop an efficient and organized search system. 
+Existing System 
+Search engines like Google and Bing search for information on the internet and show results based  on relevance. However, tools like Windows File Explorer mainly search for file names and folder  names, and searching inside many files can be slow. Tools like Ctrl+F and grep can find words  inside text, but they do not provide an easy way to rank results from multiple files. Similarly, code  editors like Visual Studio Code can search across project files, but they do not rank results based  on how often a searched word appears. These limitations show the need for a personal search  engine that can search file contents, find relevant information quickly, and display the most useful  results first. 
+Problem Statement 
+Students and other computer users often forget the names or locations of files containing important  information, even when they remember specific words, concepts, or code fragments written inside  them. This problem becomes more significant as the number of notes, assignments, and source  code files increases over time. 
+Searching for a particular concept, such as a stack, linked list, or sorting algorithm, across multiple  files can be time-consuming. Existing solutions may require repeated searches, provide results  without meaningful ranking, or make it difficult to locate the exact line containing the required  information. 
+The objective of this project is to develop an efficient personal content search engine that indexes  supported files, searches their contents, ranks matching results, and identifies the relevant file paths  and line numbers. The system will demonstrate how data structures and algorithms can be  combined to improve search efficiency and result organization.
+Proposed Solution 
+The proposed system uses different data structures and algorithms to search the contents of  personal text files and C++ source code files efficiently. It works through the following steps: 
+● File Scanning: The system scans a main project folder and all its subfolders to find files  with .txt, .cpp, and .h extensions. 
+● Text Processing: The contents of each file are converted to lowercase and split into words.  Common words, such as "the" and "is," are removed. In code files, symbols such as ;, ( ),  and { } act as separators, while names containing underscores, such as my_var, are kept as  single words. 
+● Indexing: An inverted index is built using a hash map. Each word is linked to the files and  line numbers where it appears, along with its frequency. This allows the system to find  matching files without reading every file again for each search. 
+● Searching: When a user enters a word, the system searches the index and retrieves the files  and lines containing that word. 
+● Result Ranking: The matching files are ranked according to how many times the searched  word appears. Files containing more occurrences are shown first. A heap or priority queue  can be used to retrieve the highest-ranked results efficiently, while sorting algorithms can  help arrange the final results. 
+● Displaying Results: Each result shows the file path, matching line number, occurrence  count, and a short text snippet to help the user find the required information. 
+● Word Suggestions: A tree data structure is used to suggest words as the user types. For  example, entering "sta" may suggest words such as "stack" and "static." 
+● Multi-Word Search: The system can support searching for multiple words to help users  find files related to a particular topic. 
+● File Access: Users can select a search result to open the corresponding file and locate the  required content. 
+● 
+Data Structures Concepts to be Used: 
+● Hash table / hash map: the inverted index (word to files), for fast lookup. ● Tree: word suggestions for a typed prefix. 
+● Heap (priority queue): picking the top-ranked results. 
+● Sorting: ordering results by score. 
+● Arrays / vectors: lists of files, lines and words. 
+● Strings: splitting, cleaning and matching text. 
+Salient Features
+● Searches the content inside files, not just file or folder names 
+● Works on notes (.txt) and C++ code files (.cpp, .h), to help find old code ● Reads a main folder and all its subfolders automatically at startup 
+● Results ranked by relevance, best file first 
+● Shows file path, line number and a snippet for each result 
+● Opens the selected file directly from the results 
+● Multi-word search and word suggestions 
+Tools & Technologies 
+● Programming language: C++ 
+● Libraries: C++ Standard Library (vector, unordered_map, string, fstream, filesystem) ● Operating System: Windows 
+● Tools: Visual Studio Code / Visual Studio, Git and GitHub for teamwork
