@@ -6,7 +6,7 @@
 namespace fs = std::filesystem;
 
 
-CustomVector<std::string> tokenize(const std::string& line){
+CustomVector<std::string> Indexer::tokenize(const std::string& line){
     CustomVector<std::string> words;
     std::string word = "";
 
@@ -28,11 +28,11 @@ CustomVector<std::string> tokenize(const std::string& line){
     return words;
 }
 
-bool buildIndex(const std::string& rootFolder, const CustomSet<std::string>& stopWords){
+bool Indexer::buildIndex(const std::string& rootFolder, const CustomSet<std::string>& stopWords){
 
     if (!fs::exists(rootFolder) || !fs::is_directory(rootFolder)){
         std::cout<<"Error: Folder not found: "<<rootFolder<<std::endl;
-        return;
+        return false;
     }
     for(const auto& entry : fs::recursive_directory_iterator(rootFolder, fs::directory_options::skip_permission_denied)){
         if (!entry.is_regular_file()){
@@ -76,8 +76,55 @@ bool buildIndex(const std::string& rootFolder, const CustomSet<std::string>& sto
     //for every fileInfo in 'files' and every line in each file is tokenized
     for (int F = 0; F < files.size(); F++){
         for (int L = 0; L < files[F].lines.size(); L++){
+            
             CustomVector<std::string> words = tokenize(files[F].lines[L]);
 
+            for (int w = 0; w < words.size(); w++){
+                std::string word = words[w];
+                if (stopWords.contains(word)){
+                    continue;
+                }
+                files[F].totalWords++;
+                //insert in 'index' hashtable (key = word, value = array of filepostings bcz a word might appear in different files)
+                CustomVector<FilePosting>* postings = index.find(word);
+                if(postings == nullptr){
+                    index.insert(word, CustomVector<FilePosting>()); //empty vector pass
+                    postings = index.find(word);
+                }
+                //creates new fileposting when either for a word in a file no fileposting created
+                //or when the same word found in a new file(different file id)
+                if(postings->size() == 0 || (*postings)[postings->size() - 1].fileId != F){
+                    FilePosting fp;
+                    fp.fileId = F;
+                    fp.wordCount = 0;
+                    postings->push_back(fp);
+                }
 
+                //refers to the new FilePosting(value) added to our hashtable with key(word)
+                FilePosting& currentPosting = (*postings)[postings->size() - 1];
+                currentPosting.wordCount++;
+
+                //if last Occurrence isn't line L, add {L, 1}, otherwise increment timesOnLine
+                CustomVector<Occurrence>& occ = currentPosting.occurrences;
+                if(occ.size() == 0 || occ[occ.size() - 1].lineNumber != L){
+                    Occurrence oc;
+                    oc.lineNumber = L;
+                    oc.timesOnLine = 1;
+                    occ.push_back(oc);
+                } 
+                else{
+                    occ[occ.size() - 1].timesOnLine++;
+                }
+            }
+        }
+    }
     return true;
+}
+
+CustomHashTable<std::string, CustomVector<FilePosting>>& Indexer::get_index(){
+    return index;
+}
+
+CustomVector<FileInfo>& Indexer::get_files(){
+    return files;
 }
