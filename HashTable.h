@@ -43,12 +43,12 @@ class CustomHashTable{
     int count;
     int capacity;
 
-    int getBucketIdx(const K& key) const{
-        return hashKey(key)%capacity;
+    int getBucketIdx(const K& key, int numofbuckets) const{
+        return (int)(hashKey(key)%(unsigned long)numofbuckets);
     }
 
     HashNode<K,V>* findNode(const K& key) const{
-        int index  = getBucketIdx(key);
+        int index  = getBucketIdx(key, capacity);
         HashNode<K,V>* temp = buckets[index];
         while(temp != NULL){
             if(temp->key == key){
@@ -62,16 +62,22 @@ class CustomHashTable{
     void rehash(){
         int newCapacity = capacity*2;
         HashNode<K,V>** newBuckets = new HashNode<K,V>* [newCapacity];
-        for(int i= 0; i<newCapacity i++){
+        for(int i= 0; i<newCapacity; i++){
             newBuckets[i] = nullptr;
         }
         for(int i = 0; i<capacity; i++){
-            newBuckets[i] = buckets[i];
+            HashNode<K, V>* curr = buckets[i];
+            while (curr != nullptr){
+                HashNode<K, V>* nextNode = curr->next;
+                int newIdx = getBucketIdx(curr->key, newCapacity);
+                curr->next = newBuckets[newIdx];
+                newBuckets[newIdx] = curr;
+                curr = nextNode;
+            }
         }
-        for(int i = 0; i<capacity; i++){
-            delete [] buckets[i];
-        }
-        delete [] buckets;
+        delete[] buckets;
+        buckets = newBuckets;
+        capacity = newCapacity;
     }
 
     public:
@@ -105,7 +111,7 @@ class CustomHashTable{
             exists->val = val;
             return;
         }
-        int index = getBucketIdx(key);
+        int index = getBucketIdx(key, capacity);
         HashNode<K,V>* newNode = new HashNode<K,V>(key,val);
 
         newNode->next = buckets[index];
