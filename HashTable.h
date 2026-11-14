@@ -59,11 +59,26 @@ class CustomHashTable{
         return nullptr;
     }
     
+    void rehash(){
+        int newCapacity = capacity*2;
+        HashNode<K,V>** newBuckets = new HashNode<K,V>* [newCapacity];
+        for(int i= 0; i<newCapacity i++){
+            newBuckets[i] = nullptr;
+        }
+        for(int i = 0; i<capacity; i++){
+            newBuckets[i] = buckets[i];
+        }
+        for(int i = 0; i<capacity; i++){
+            delete [] buckets[i];
+        }
+        delete [] buckets;
+    }
+
     public:
     CustomHashTable(){
         count = 0;
         capacity = 16;
-        buckets = new HashNode<K,V>* [capacity];
+        buckets = new HashNode<K,V>*[capacity];
         for(int i= 0; i<capacity; i++){
             buckets[i] = nullptr;
         }
@@ -96,7 +111,13 @@ class CustomHashTable{
         newNode->next = buckets[index];
         buckets[index] = newNode;
         count++;
+
+        if((float)count/capacity > 0.75){
+            rehash();
+        }
+
     }
+
     CustomVector<K> keys() const{
         CustomVector<K> keylist;
         for(int i = 0; i<capacity ;i++){
@@ -108,7 +129,7 @@ class CustomHashTable{
         }
         return keylist;
     }
-    
+
     bool contains(const K& key) const{
         return (findNode(key))? true : false;
     }
