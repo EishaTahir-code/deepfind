@@ -99,8 +99,16 @@ class CustomHashTable{
     }
     CustomVector<K> keys() const{
         CustomVector<K> keylist;
-        
+        for(int i = 0; i<capacity ;i++){
+            HashNode<K,V>* curr = buckets[i];
+            while(curr!=NULL){
+                keylist.push_back(curr->key);
+                curr = curr->next;
+            }
+        }
+        return keylist;
     }
+    
     bool contains(const K& key) const{
         return (findNode(key))? true : false;
     }
