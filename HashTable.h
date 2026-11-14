@@ -97,7 +97,10 @@ class CustomHashTable{
         buckets[index] = newNode;
         count++;
     }
-
+    CustomVector<K> keys() const{
+        CustomVector<K> keylist;
+        
+    }
     bool contains(const K& key) const{
         return (findNode(key))? true : false;
     }
