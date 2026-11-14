@@ -9,3 +9,6 @@
 #include "Set.h" 
 
 CustomVector<std::string> tokenize(const std::string& line);
+bool buildIndex(const std::string& rootFolder, const CustomSet<std::string>& stopWords); 
+CustomHashTable<std::string, CustomVector<FilePosting>>& get_index();
+CustomVector<FileInfo>& get_files();
