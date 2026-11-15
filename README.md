@@ -23,3 +23,43 @@ Users can search for specific words or multiple words and receive ranked results
 - Provide word suggestions while users type.
 - Display matching file paths, line numbers, and text snippets.
 - Demonstrate the practical application of Data Structures and Algorithms in C++.
+
+## ✨ Key Features
+
+- **Content-Based Searching:** Searches inside file contents rather than relying only on file names.
+- **Multiple File Support:** Indexes and searches `.txt`, `.cpp`, and `.h` source and text files.
+- **Recursive Directory Scanning:** Automatically scans a target folder and all nested subdirectories.
+- **Inverted Index Architecture:** Maps every unique word to its matching files, frequency counts, and exact line numbers for fast lookup.
+- **Stop-Word Filtering:** Ignores common filler words (e.g., *the*, *is*, *and*) to keep indexing fast and results relevant.
+- **Ranked Search Results:** Ranks matching files by word frequency and relevance score.
+- **Detailed Match Snippets:** Displays file paths, total occurrences, line numbers, and matching lines of text.
+- **Multi-Word Search:** Supports searching with single or multiple keywords at once.
+- **Word Suggestions:** Suggests matching words based on the prefix entered by the user.
+- **Direct File Access:** Lets users open or inspect selected files directly from the search results.
+- **Graphical User Interface:** Provides a clean, user-friendly interface for searching and viewing results.
+
+## 🧠 Data Structures and Algorithms
+
+DeepFind implements core data structures from scratch in C++ (without relying on STL containers) to power indexing, lookup, and ranking:
+
+| Data Structure / Algorithm | Purpose |
+| :--- | :--- |
+| **Custom Hash Table** | Stores the inverted index (`word` $\rightarrow$ `FilePosting` list) for $O(1)$ average-case word lookup. |
+| **Custom Dynamic Vector** | Manages collections of indexed files, file lines, posting lists, and occurrences. |
+| **Custom Set** | Stores stop words for fast filtering during tokenization and indexing. |
+| **Trie (Prefix Tree)** | Provides word autocomplete suggestions based on typed prefixes. |
+| **Heap / Priority Queue** | Efficiently extracts the top-$K$ highest-ranked search results. |
+| **Sorting Algorithms** | Orders search results by relevance score and occurrence frequency. |
+
+## ⚙️ How It Works
+
+DeepFind follows a modular pipeline to index and retrieve personal files:
+
+1. **Directory Crawling:** Recursively scans the selected root folder and its subdirectories for `.txt`, `.cpp`, and `.h` files.
+2. **Tokenization & Cleaning:** Reads file contents line by line, strips formatting characters, converts text to lowercase, and filters out stop words.
+3. **Inverted Indexing:** Populates a custom hash table mapping each unique word to its file IDs, word counts, and line occurrences.
+4. **Query Processing:** Tokenizes user search queries and retrieves matching posting lists from the inverted index.
+5. **Relevance Ranking:** Scores and ranks matching files based on keyword frequency using a heap/sorting pipeline.
+6. **Result Display:** Outputs ranked file paths, occurrence counts, line numbers, and matching text snippets.
+7. **Prefix Suggestions:** Queries a Trie to suggest matching indexed words for user prefixes.
+8. **File Access:** Allows users to open or view the selected file directly from the results.
