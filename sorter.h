@@ -27,7 +27,7 @@ void merge(CustomVector<T>& arr1, CustomVector<T>& arr2, int left, int mid, int 
 
 template <typename T>
 void mergesort(CustomVector<T>& arr1, CustomVector<T>& arr2, int left, int right, bool(*before)(const T&, const T&)){
-    if((left-right)<2){
+    if((right-left)<2){
         return;
     }
     int mid=left+(right-left)/2;
