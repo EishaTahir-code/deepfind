@@ -1,4 +1,4 @@
-//THIS FILE IS FROM CLAUDE AI
+#THIS FILE IS FROM CLAUDE AI
 cmake_minimum_required(VERSION 3.15)
 project(DeepFind LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
@@ -15,9 +15,9 @@ function(add_program_if_ready name)
     add_executable(${name} ${ARGN})
 endfunction()
 
-add_program_if_ready(deepfind main.cpp Indexer.cpp Ranker.cpp QueryEngine.cpp)
+add_program_if_ready(deepfind main.cpp Indexer.cpp ranker.cpp QueryEngine.cpp)
 add_program_if_ready(test_indexer test_indexer_ds.cpp Indexer.cpp)
-add_program_if_ready(test_ranker test_ranker_ds.cpp Ranker.cpp)
+add_program_if_ready(test_ranker test_ranker_ds.cpp ranker.cpp)
 add_program_if_ready(test_query test_query_ds.cpp Indexer.cpp QueryEngine.cpp)
 
 foreach(testProgram test_indexer test_ranker test_query)
