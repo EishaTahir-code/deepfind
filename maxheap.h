@@ -1,6 +1,6 @@
 #pragma once
 #include<stdexcept>
-#include<vector.h>
+#include "vector.h"
 
 template<typename T>
 class CustomMaxHeap{
@@ -53,7 +53,7 @@ class CustomMaxHeap{
         return tree.empty();
     }
 
-    int size(){
+    int size() const{
         return tree.size();
     }
 
