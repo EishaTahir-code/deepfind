@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Set.h"
+#include "Trie.h"
 
 void check(bool ok, const char* name) {
     std::cout << (ok ? "PASS: " : "FAIL: ") << name << "\n";
@@ -31,4 +32,16 @@ int main() {
     check(stop.contains("the"), "the is a stop word");
     check(!stop.contains("for"), "for is NOT a stop word");
     check(!stop.contains("stack"), "stack is NOT a stop word");
+        CustomTrie t;
+    t.insert("stack", 12);
+    t.insert("static", 3);
+    t.insert("start", 3);
+    t.insert("string", 5);
+
+    CustomVector<Suggestion> r = t.getSuggestions("sta");
+    check(r.size() == 3, "sta gives 3 words");
+    check(r[0].word == "stack", "most frequent comes first");
+    check(t.getSuggestions("zzz").size() == 0, "no match gives an empty list");
+    check(t.search("stack"), "search finds a real word");
+    check(!t.search("sta"), "sta is only a beginning, not a word");
 }
