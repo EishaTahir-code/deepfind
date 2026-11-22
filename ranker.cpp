@@ -17,6 +17,17 @@ CustomVector<SearchResult> rankResults(const CustomVector<SearchResult>& options
         SearchResult r=options[i];
         r.score=r.wordCount;
         customSort(r.occurrences, lineBefore);
+        //join repeat of same lines
+        CustomVector<Occurrence> merged;
+        for(int j=0; j<r.occurrences.size(); j++){
+            if(!merged.empty() && merged.back().lineNumber==r.occurrences[j].lineNumber){
+                merged.back().timesOnLine+=r.occurrences[j].timesOnLine;
+            }
+            else{
+                merged.push_back(r.occurrences[j]);
+            }
+        }
+        r.occurrences=merged;
         heap.insert(r);
     }
     CustomVector<SearchResult> results;
@@ -35,10 +46,11 @@ void printResults(const CustomVector<SearchResult>& results, const CustomVector<
     for(int i=0; i<results.size(); i++){
         const SearchResult& r=results[i];
         const FileInfo& file=files[r.fileId];
-        cout<<file.path<<endl<<r.wordCount<<endl;
+        cout<<i+1<<". "<<file.path;
+        cout<<"Found "<<r.wordCount<<" times"<<endl;
         for(int j=0; j<r.occurrences.size() && j<3; j++){
             int line=r.occurrences[j].lineNumber;
-            cout<<file.lines[line-1]<<endl;
+            cout<<" Line: "<<line+1<<": "<<file.lines[line]<<endl;
         }
     }
 }
