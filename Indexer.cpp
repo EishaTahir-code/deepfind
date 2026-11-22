@@ -6,7 +6,7 @@
 namespace fs = std::filesystem;
 
 
-CustomVector<std::string> Indexer::tokenize(const std::string& line){
+CustomVector<std::string> Indexer::tokenize(const std::string& line) const{
     CustomVector<std::string> words;
     std::string word = "";
 
@@ -108,7 +108,7 @@ bool Indexer::buildIndex(const std::string& rootFolder, const CustomSet<std::str
                 CustomVector<Occurrence>& occ = currentPosting.occurrences;
                 if(occ.size() == 0 || occ[occ.size() - 1].lineNumber != L){
                     Occurrence oc;
-                    oc.lineNumber = L;
+                    oc.lineNumber = L+1;
                     oc.timesOnLine = 1;
                     occ.push_back(oc);
                 } 
@@ -126,5 +126,13 @@ CustomHashTable<std::string, CustomVector<FilePosting>>& Indexer::get_index(){
 }
 
 CustomVector<FileInfo>& Indexer::get_files(){
+    return files;
+}
+
+const CustomHashTable<std::string, CustomVector<FilePosting>>& Indexer::get_index() const {
+    return index;
+}
+
+const CustomVector<FileInfo>& Indexer::get_files() const {
     return files;
 }
