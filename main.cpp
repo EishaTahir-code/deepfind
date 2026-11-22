@@ -2,6 +2,7 @@
 #include <conio.h>
 #include "QueryEngine.h"
 #include "ranker.h"
+#include "Indexer.h"
 using namespace std;
 
 string rwsuggest(const CustomTrie& trie) {

@@ -106,7 +106,7 @@ bool Indexer::buildIndex(const std::string& rootFolder, const CustomSet<std::str
 
                 //if last Occurrence isn't line L, add {L, 1}, otherwise increment timesOnLine
                 CustomVector<Occurrence>& occ = currentPosting.occurrences;
-                if(occ.size() == 0 || occ[occ.size() - 1].lineNumber != L){
+                if(occ.size() == 0 || occ[occ.size() - 1].lineNumber != L+1){
                     Occurrence oc;
                     oc.lineNumber = L+1;
                     oc.timesOnLine = 1;
