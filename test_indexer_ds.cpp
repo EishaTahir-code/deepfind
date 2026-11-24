@@ -7,11 +7,9 @@
 #include "Indexer.h"             
 
 static int failures = 0;        
-
 static void check(bool condition, const std::string& name){  
-    if(condition){                                         
+    if(condition)     
         std::cout<<"PASS  "<<name<<"\n";              
-    } 
     else{                                                
         std::cout<<"FAIL  "<<name<<"\n";                
         failures++;
@@ -20,16 +18,14 @@ static void check(bool condition, const std::string& name){
 
 int main(){
     CustomVector <int> numbers;
-    for(int i = 0; i < 100000; i++){
+    for(int i = 0; i < 100000; i++)
         numbers.push_back(i);
-    }
+    
     check(numbers.size() == 100000, "push_back 100,000 items");
     check(numbers[0] == 0 && numbers[99999] == 99999, "operator[] reads the right items");
-
     CustomVector <int> copy = numbers;
     copy[0] = -1;
     check(numbers[0] == 0, "copy constructor makes an independent copy");
-
     CustomVector <int> assigned;
     assigned.push_back(7);
     assigned = numbers;
@@ -43,7 +39,6 @@ int main(){
     CustomVector<CustomVector<std::string>> nestedCopy = nested;
     nestedCopy[0][0] = "changed";
     check(nested[0][0] == "hello", "nested vectors copy deeply");
-
     numbers.pop_back();
     check(numbers.size() == 99999 && numbers.back() == 99998, "pop_back and back");
 
@@ -56,7 +51,6 @@ int main(){
         threw = true;
     }
     check(threw, "pop_back on an empty vector throws");
-
     numbers.clear();
     check(numbers.empty() && numbers.size() == 0, "clear empties the vector");
 
@@ -113,7 +107,6 @@ int main(){
     check(aIsRight, "counts and line numbers for a.txt are right");
     check(idx.get_index().find("the") == nullptr, "stop words are not indexed"); 
     fs::remove_all(dir);
-
     std::cout<<"\n"<<(failures == 0 ? "All tests passed." : "Some tests FAILED.")<<"\n";
     return failures == 0 ? 0 : 1;
 }
