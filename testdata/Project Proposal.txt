@@ -4,8 +4,8 @@ Project Proposal
 Data Structures 
 Section: G 
 Group Members: 
-25k-0668 Esh Tu Raazia 25k 
-0527 Syeda Eisha Tahir 
+25k-0668 Esh Tu Raazia 
+25k-0527 Syeda Eisha Tahir 
 25k-0691 Anseeba Ali Jivani
 Project Proposal 
 Introduction 

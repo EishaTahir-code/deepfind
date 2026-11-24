@@ -2,7 +2,7 @@
 #include <fstream>             
 #include <filesystem>         
 #include <string>            
-#include "Vector.h"            
+#include "vector.h"            
 #include "HashTable.h"        
 #include "Indexer.h"             
 

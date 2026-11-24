@@ -1,6 +1,6 @@
 #pragma once
 #include "Trie.h"
-#include "set.h"
+#include "Set.h"
 #include "Types.h"
 #include "Indexer.h"
 
