@@ -63,3 +63,70 @@ DeepFind follows a modular pipeline to index and retrieve personal files:
 6. **Result Display:** Outputs ranked file paths, occurrence counts, line numbers, and matching text snippets.
 7. **Prefix Suggestions:** Queries a Trie to suggest matching indexed words for user prefixes.
 8. **File Access:** Allows users to open or view the selected file directly from the results.
+
+## 🛠️ Technologies Used
+
+- **Programming Language:** C++ (C++17)
+- **User Interface:** Interactive Command-Line Interface (CLI) with real-time keystroke suggestions
+- **Custom Data Structures:** `CustomVector`, `CustomHashTable`, `CustomSet`, `CustomTrie`
+- **Standard C++ Headers:** `<iostream>`, `<fstream>`, `<filesystem>`, `<string>`, `<cctype>`, `<conio.h>`
+- **Compiler & Tools:** GCC / MinGW-w64 (`g++`), Visual Studio / VS Code
+- **Operating System:** Windows
+- **Version Control:** Git and GitHub
+
+also check below edit and regive
+
+
+## 🛠️ Technologies Used
+
+- **Programming Language:** C++
+- **GUI:** Graphical User Interface
+- **IDE:** Microsoft Visual Studio
+- **Libraries:**
+  - `vector`
+  - `unordered_map`
+  - `string`
+  - `fstream`
+  - `filesystem`
+- **Operating System:** Windows
+- **Version Control:** Git and GitHub
+
+## 🔎 Example Use Case
+
+Suppose a student wants to find information about **Stack** but cannot remember which file contains the relevant notes or code.
+
+Using DeepFind, the student can:
+
+1. Select the folder containing their notes and source code.
+2. Enter `stack` in the search bar.
+3. View matching files ranked by the number of occurrences.
+4. Check the file path, line number, and matching text snippet.
+5. Open the required file directly from the search results.
+
+## 🔮 Future Enhancements
+
+- Support for additional file formats such as `.pdf` and `.docx`.
+- Advanced search options and filtering.
+- Improved relevance-ranking algorithms.
+- Search history and recently opened files.
+- More advanced text-processing capabilities.
+
+## 👥 Team Members
+
+This project is developed collaboratively by a team of three members.
+
+- Esh tu Razia
+- Syeda Eisha Tahir
+- Anseeba Ali Jivani
+
+## 📄 License
+
+This project is developed for educational purposes as part of a Data Structures and Algorithms course.
+
+
+---
+
+<h3 align="center">🔍 DeepFind</h3>
+<p align="center">
+  <b>Find What You Remember, Not Just What You Named.</b>
+</p>
