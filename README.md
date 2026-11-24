@@ -74,8 +74,6 @@ DeepFind follows a modular pipeline to index and retrieve personal files:
 - **Operating System:** Windows
 - **Version Control:** Git and GitHub
 
-also check below edit and regive
-
 ## 🔎 Example Use Case
 
 Suppose a student wants to find information about **Stack** but cannot remember which file contains the relevant notes or code.
