@@ -76,21 +76,6 @@ DeepFind follows a modular pipeline to index and retrieve personal files:
 
 also check below edit and regive
 
-
-## 🛠️ Technologies Used
-
-- **Programming Language:** C++
-- **GUI:** Graphical User Interface
-- **IDE:** Microsoft Visual Studio
-- **Libraries:**
-  - `vector`
-  - `unordered_map`
-  - `string`
-  - `fstream`
-  - `filesystem`
-- **Operating System:** Windows
-- **Version Control:** Git and GitHub
-
 ## 🔎 Example Use Case
 
 Suppose a student wants to find information about **Stack** but cannot remember which file contains the relevant notes or code.
